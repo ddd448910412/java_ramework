@@ -43,6 +43,7 @@ public final class DatabaseHelper {
         String username = conf.getProperty("jdbc.username");
         String password = conf.getProperty("jdbc.password");
 
+        //BasicDataSource类实现了DataSource接口，可以用于DBCP连接池的简单使用。
         DATA_SOURCE = new BasicDataSource();
         DATA_SOURCE.setDriverClassName(driver);
         DATA_SOURCE.setUrl(url);
@@ -57,6 +58,7 @@ public final class DatabaseHelper {
         Connection conn = CONNECTION_HOLDER.get();
         if (conn == null) {
             try {
+                //获取数据库连接
                 conn = DATA_SOURCE.getConnection();
             } catch (SQLException e) {
                 LOGGER.error("get connection failure", e);
@@ -193,6 +195,11 @@ public final class DatabaseHelper {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         try {
             String sql;
+         /**   Java：bufferedReader.readLine()读取文件换行问题
+        FileInputStream来读取，完全没有问题，他是读取字节形式的，所以读到中文字符的时候，字节流就会出现乱码，
+    所以必去用要字符流来读取，在用FileInputStream读取文件是用他里面read（）方法来读取的，是一口气直接全部读完的，
+    就会留下原来文件换行的脚印，但是用BufferedReader来读取是用readLine（）来读取的，意思是一行一行的来读取，
+    这样当读到回车符的时候，就先返回给字符串，然后再进行下一行的读取！*/
             while ((sql = reader.readLine()) != null) {
                 executeUpdate(sql);
             }
