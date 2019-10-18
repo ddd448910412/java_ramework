@@ -29,4 +29,5 @@ public class CustomerServlet extends HttpServlet {
         req.setAttribute("customerList", customerList);
         req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
     }
+
 }

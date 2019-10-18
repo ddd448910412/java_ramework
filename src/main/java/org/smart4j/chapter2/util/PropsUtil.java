@@ -54,6 +54,7 @@ public final class PropsUtil {
      */
     public static String getString(Properties props, String key, String defaultValue) {
         String value = defaultValue;
+        //该方法判断Map集合对象中是否包含指定的键名。如果Map集合中包含指定的键名，则返回true，否则返回false。
         if (props.containsKey(key)) {
             value = props.getProperty(key);
         }
