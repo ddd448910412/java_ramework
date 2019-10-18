@@ -21,6 +21,7 @@ public final class PropsUtil {
         Properties props = null;
         InputStream is = null;
         try {
+            //得到当前的classpath的绝对路径的URI表示法
             is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             if (is == null) {
                 throw new FileNotFoundException(fileName + " file is not found");
